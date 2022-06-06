@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "950593012951",
+    "project_id": "whatsnearme-af7ce",
+    "storage_bucket": "whatsnearme-af7ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:950593012951:android:76ba872405bc89e6ccdc92",
+        "android_client_info": {
+          "package_name": "com.example.g6_whatsnearmeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "950593012951-bik2s6hafroe7k5ii3adf5l0ki2e9aio.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVTET777wPdsZvxXnnP-CvteHVeq_Pc6I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "950593012951-bik2s6hafroe7k5ii3adf5l0ki2e9aio.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

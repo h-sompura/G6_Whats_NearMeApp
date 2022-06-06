@@ -11,65 +11,58 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.g6_whatsnearmeapp.databinding.ActivityMainBinding;
+import com.example.g6_whatsnearmeapp.databinding.ActivityRegisterBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
-public class MainActivity extends AppCompatActivity
+public class Register extends AppCompatActivity
 {
     private FirebaseAuth mAuth;
-    private ActivityMainBinding binding;
+    private ActivityRegisterBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        this.binding = ActivityMainBinding.inflate(getLayoutInflater());
+        this.binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(this.binding.getRoot());
 
         mAuth = FirebaseAuth.getInstance();
 
-        binding.registerButton.setOnClickListener(new View.OnClickListener()
+        binding.register.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                Intent intent = new Intent(view.getContext(), Register.class);
-                startActivity(intent);
-            }
-        });
-
-        binding.loginButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                authenticateUser();
+                registerUser();
             }
         });
     }
 
-    void authenticateUser()
+    void registerUser()
     {
-        String email = binding.etEmail.getText().toString();
-        String password = binding.etPassword.getText().toString();
+        String newEmail = binding.etNewEmail.getText().toString().trim();
+        String newPassword = binding.etNewPassword.getText().toString().trim();
 
-        if(email.isEmpty() || password.isEmpty())
+        if(newEmail.isEmpty() || newPassword.isEmpty())
         {
             Log.d("abc","Email/Password empty");
             binding.tvError.setText("Email/Password cannot be left empty");
             return;
         }
-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches())
+        if(!Patterns.EMAIL_ADDRESS.matcher(newEmail).matches())
         {
             Log.d("abc","Email not valid");
             binding.tvError.setText("Please provide a valid Email address");
             return;
         }
+        binding.tvError.setText("");
 
-        mAuth.signInWithEmailAndPassword(email, password)
+        mAuth.createUserWithEmailAndPassword(newEmail, newPassword)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>()
                 {
                     @Override
@@ -77,21 +70,31 @@ public class MainActivity extends AppCompatActivity
                     {
                         if (task.isSuccessful())
                         {
-                            goToHomeScreen();
+                            User user = new User(newEmail,newPassword);
+                            FirebaseDatabase.getInstance().getReference("users")
+                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>()
+                                    {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task)
+                                        {
+                                            showLoginScreen();
+                                        }
+                                    });
                         }
                         else
                         {
-                            Toast.makeText(MainActivity.this,"Failed to Login",Toast.LENGTH_LONG).show();
-                            binding.tvError.setText("Username or Password is wrong");
+                            Toast.makeText(Register.this,"Failed to register",Toast.LENGTH_LONG).show();
                         }
                     }
                 });
     }
 
-    void goToHomeScreen()
+    void showLoginScreen()
     {
-        Intent intent = new Intent(this, HomeScreen.class);
+        Intent intent = new Intent (this,MainActivity.class);
         startActivity(intent);
     }
+
 
 }
