@@ -14,13 +14,13 @@
         android:theme="@style/Theme.G6_WhatsNearMeApp"
         tools:targetApi="31">
         <activity
-            android:name=".HomeScreen"
+            android:name=".viewmodels.HomeScreen"
             android:exported="false" />
         <activity
-            android:name=".Register"
+            android:name=".viewmodels.Register"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".viewmodels.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

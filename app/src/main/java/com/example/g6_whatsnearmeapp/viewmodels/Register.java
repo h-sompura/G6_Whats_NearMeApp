@@ -1,4 +1,4 @@
-package com.example.g6_whatsnearmeapp;
+package com.example.g6_whatsnearmeapp.viewmodels;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,13 +10,12 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.g6_whatsnearmeapp.databinding.ActivityMainBinding;
 import com.example.g6_whatsnearmeapp.databinding.ActivityRegisterBinding;
+import com.example.g6_whatsnearmeapp.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Register extends AppCompatActivity
