@@ -41,6 +41,16 @@ public class Register extends AppCompatActivity
                 registerUser();
             }
         });
+
+        binding.loginButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(view.getContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     void registerUser()
