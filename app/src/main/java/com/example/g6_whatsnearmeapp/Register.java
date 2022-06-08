@@ -92,8 +92,8 @@ public class Register extends AppCompatActivity
                                         }
                                     });
                         }
-                        else
-                        {
+                        else if (!task.isSuccessful()) {
+                            Log.e("Register", "onComplete: Failed=" + task.getException().getMessage());
                             Toast.makeText(Register.this,"Failed to register",Toast.LENGTH_LONG).show();
                         }
                     }
