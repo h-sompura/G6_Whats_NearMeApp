@@ -1,4 +1,4 @@
-package com.example.g6_whatsnearmeapp.network;
+package com.example.g6_whatsnearmeapp.repositories.API;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

@@ -1,4 +1,4 @@
-package com.example.g6_whatsnearmeapp.network;
+package com.example.g6_whatsnearmeapp.repositories.API;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

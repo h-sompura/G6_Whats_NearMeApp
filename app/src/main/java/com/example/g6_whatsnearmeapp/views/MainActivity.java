@@ -1,4 +1,4 @@
-package com.example.g6_whatsnearmeapp.viewmodels;
+package com.example.g6_whatsnearmeapp.views;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
