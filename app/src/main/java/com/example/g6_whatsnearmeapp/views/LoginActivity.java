@@ -71,12 +71,18 @@ public class LoginActivity extends AppCompatActivity
         {
             Log.d("abc","Email/Password empty");
             binding.tvError.setText("Email/Password cannot be left empty");
+            //clear input fields
+            binding.etEmail.setText("");
+            binding.etPassword.setText("");
             return;
         }
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches())
         {
             Log.d("abc","Email not valid");
             binding.tvError.setText("Please provide a valid Email address");
+            //clear input fields
+            binding.etEmail.setText("");
+            binding.etPassword.setText("");
             return;
         }
 
@@ -89,6 +95,9 @@ public class LoginActivity extends AppCompatActivity
                         if (task.isSuccessful())
                         {
                             Toast.makeText(LoginActivity.this,"Login Successful!",Toast.LENGTH_LONG).show();
+                            //clear input fields
+                            binding.etEmail.setText("");
+                            binding.etPassword.setText("");
                             goToHomeScreen();
                         }
                         else
@@ -98,6 +107,9 @@ public class LoginActivity extends AppCompatActivity
                         }
                     }
                 });
+        //clear input fields
+        binding.etEmail.setText("");
+        binding.etPassword.setText("");
     }
 
     void goToHomeScreen()

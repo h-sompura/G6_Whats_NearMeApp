@@ -61,12 +61,18 @@ public class RegisterActivity extends AppCompatActivity
         {
             Log.d("abc","Email/Password empty");
             binding.tvError.setText("Email/Password cannot be left empty");
+            //clear input fields
+            binding.etNewEmail.setText("");
+            binding.etNewPassword.setText("");
             return;
         }
         if(!Patterns.EMAIL_ADDRESS.matcher(newEmail).matches())
         {
             Log.d("abc","Email not valid");
             binding.tvError.setText("Please provide a valid Email address");
+            //clear input fields
+            binding.etNewEmail.setText("");
+            binding.etNewPassword.setText("");
             return;
         }
         binding.tvError.setText("");
@@ -87,6 +93,9 @@ public class RegisterActivity extends AppCompatActivity
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task)
                                         {
+                                            //clear input fields
+                                            binding.etNewEmail.setText("");
+                                            binding.etNewPassword.setText("");
                                             showLoginScreen();
                                         }
                                     });
@@ -97,6 +106,9 @@ public class RegisterActivity extends AppCompatActivity
                         }
                     }
                 });
+        //clear input fields
+        binding.etNewEmail.setText("");
+        binding.etNewPassword.setText("");
     }
 
     void showLoginScreen()
