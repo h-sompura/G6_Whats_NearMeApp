@@ -109,7 +109,7 @@ public class HomeScreen extends AppCompatActivity implements LocationListener {
             @Override
             public void onClick(View v) {
                 Log.d("CurrentLocation:", "Button Clicked!");
-                getLocation();
+                getCurrentLocation();
             }
         });
 
@@ -127,7 +127,7 @@ public class HomeScreen extends AppCompatActivity implements LocationListener {
 
     //get current location config
     @SuppressLint("MissingPermission")
-    private void getLocation() {
+    private void getCurrentLocation() {
 
         try {
             locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
