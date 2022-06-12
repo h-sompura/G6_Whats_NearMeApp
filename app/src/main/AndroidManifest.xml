@@ -17,10 +17,10 @@
             android:name=".views.HomeScreen"
             android:exported="false" />
         <activity
-            android:name=".views.Register"
+            android:name=".views.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".views.MainActivity"
+            android:name=".views.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

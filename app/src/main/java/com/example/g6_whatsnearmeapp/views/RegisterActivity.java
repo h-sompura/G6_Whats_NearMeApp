@@ -18,7 +18,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class Register extends AppCompatActivity
+public class RegisterActivity extends AppCompatActivity
 {
     private FirebaseAuth mAuth;
     private ActivityRegisterBinding binding;
@@ -46,7 +46,7 @@ public class Register extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                Intent intent = new Intent(view.getContext(), MainActivity.class);
+                Intent intent = new Intent(view.getContext(), LoginActivity.class);
                 startActivity(intent);
             }
         });
@@ -93,7 +93,7 @@ public class Register extends AppCompatActivity
                         }
                         else if (!task.isSuccessful()) {
                             Log.e("Register", "onComplete: Failed=" + task.getException().getMessage());
-                            Toast.makeText(Register.this,"Failed to register",Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegisterActivity.this,"Failed to register",Toast.LENGTH_LONG).show();
                         }
                     }
                 });
@@ -101,9 +101,8 @@ public class Register extends AppCompatActivity
 
     void showLoginScreen()
     {
-        Intent intent = new Intent (this,MainActivity.class);
+        Intent intent = new Intent (this, LoginActivity.class);
         startActivity(intent);
     }
-
 
 }
