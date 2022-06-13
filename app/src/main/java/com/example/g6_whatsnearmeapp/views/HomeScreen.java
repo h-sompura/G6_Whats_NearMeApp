@@ -11,6 +11,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -26,6 +27,7 @@ import android.widget.Toast;
 import com.example.g6_whatsnearmeapp.R;
 import com.example.g6_whatsnearmeapp.databinding.ActivityHomeScreenBinding;
 import com.example.g6_whatsnearmeapp.databinding.ActivityLoginBinding;
+import com.example.g6_whatsnearmeapp.viewmodels.HomeScreenModel;
 import com.google.android.gms.common.api.Status;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
@@ -42,6 +44,9 @@ public class HomeScreen extends AppCompatActivity implements LocationListener {
 
     private ActivityHomeScreenBinding binding;
     LocationManager locationManager;
+    private HomeScreenModel homeScreenModel;
+    private double getCurrentLat;
+    private double getCurrentLong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +61,9 @@ public class HomeScreen extends AppCompatActivity implements LocationListener {
 
         // Customize the back button
         actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_exit_to_app_24);
+
+        //viewmodel instance
+        this.homeScreenModel = HomeScreenModel.getInstance(this.getApplication());
 
         // showing the back button in action bar
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -87,6 +95,11 @@ public class HomeScreen extends AppCompatActivity implements LocationListener {
             public void onPlaceSelected(@NonNull Place place) {
                 //places.getName will display the name we select
                 Log.i("Places", "Place: " + place.getName() + ", " + place.getId());
+                getCurrentLat = place.getLatLng().latitude;
+                getCurrentLong = place.getLatLng().longitude;
+
+                //saving into viewmodel
+                homeScreenModel.saveCurrentLocation(getCurrentLat,getCurrentLong);
             }
 
 
@@ -96,7 +109,7 @@ public class HomeScreen extends AppCompatActivity implements LocationListener {
             }
         });
 
-        //Get location permisions from the user
+        //Get location permissions from the user
         if (ContextCompat.checkSelfPermission(HomeScreen.this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(HomeScreen.this,new String[]{
@@ -142,13 +155,15 @@ public class HomeScreen extends AppCompatActivity implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         Toast.makeText(this, ""+location.getLatitude()+","+location.getLongitude(), Toast.LENGTH_SHORT).show();
+        getCurrentLat = location.getLatitude();
+        getCurrentLong = location.getLongitude();
+        //saving into viewmodel
+        homeScreenModel.saveCurrentLocation(getCurrentLat, getCurrentLong);
         try {
             Geocoder geocoder = new Geocoder(HomeScreen.this, Locale.getDefault());
             List<Address> addresses = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
             String address = addresses.get(0).getAddressLine(0);
-
             Log.d("CurrentLocation:", address);
-
         }catch (Exception e){
             e.printStackTrace();
         }

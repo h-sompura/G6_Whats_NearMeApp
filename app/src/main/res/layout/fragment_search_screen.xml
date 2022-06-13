@@ -7,13 +7,20 @@
     tools:context=".views.fragments.SearchScreenFragment">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Search Screen"
-        android:textAlignment="center"
-        android:textSize="20sp"
+        android:id="@+id/tvLocationName"
+        android:layout_width="387dp"
+        android:layout_height="56dp"
+        android:drawableLeft="@drawable/ic_baseline_location_on_24"
+        android:drawablePadding="4dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:paddingLeft="20dp"
+        android:text=""
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.044" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
