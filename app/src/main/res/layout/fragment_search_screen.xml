@@ -22,15 +22,41 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.044" />
 
+
+    <EditText
+        android:id="@+id/etSearchTerm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Search a term..."
+        app:layout_constraintStart_toStartOf="@+id/tvLocationName"
+        app:layout_constraintTop_toBottomOf="@+id/tvLocationName" />
+
+    <Button
+        android:id="@+id/btnSearch"
+        android:layout_width="97dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="8dp"
+        android:text="Search"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_semibold"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toEndOf="@+id/etSearchTerm"
+        app:layout_constraintTop_toTopOf="@+id/etSearchTerm" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvBusinessItems"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="404dp"
+        android:layout_height="546dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvLocationName"
-        tools:listitem="@layout/custom_row_layout"/>
+        app:layout_constraintTop_toBottomOf="@+id/etSearchTerm"
+        app:layout_constraintVertical_bias="0.937"
+        tools:listitem="@layout/custom_row_layout" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

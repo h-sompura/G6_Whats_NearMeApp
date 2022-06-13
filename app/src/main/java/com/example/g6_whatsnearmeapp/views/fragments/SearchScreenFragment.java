@@ -160,6 +160,17 @@ public class SearchScreenFragment extends Fragment implements OnRowClicked {
         }catch (Exception e){
             e.printStackTrace();
         }
+
+        //search button handler
+        binding.btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String searchedTerm = binding.etSearchTerm.getText().toString();
+                Log.d("Search", searchedTerm);
+
+                //call api after getting the searched term and location!
+            }
+        });
     }
 
     @Override
