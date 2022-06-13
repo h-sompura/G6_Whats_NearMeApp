@@ -8,8 +8,8 @@
 
     <TextView
         android:id="@+id/tvLocationName"
-        android:layout_width="387dp"
-        android:layout_height="56dp"
+        android:layout_width="375dp"
+        android:layout_height="66dp"
         android:drawableLeft="@drawable/ic_baseline_location_on_24"
         android:drawablePadding="4dp"
         android:fontFamily="@font/poppins_semibold"
