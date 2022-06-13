@@ -9,6 +9,7 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.12968591691995948" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/custom_row_layout.xml" value="0.28125" />
         <entry key="app/src/main/res/layout/fragment_favourites_screen.xml" value="0.13728470111448834" />
         <entry key="app/src/main/res/layout/fragment_search_screen.xml" value="0.18235294117647058" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.1814814814814815" />

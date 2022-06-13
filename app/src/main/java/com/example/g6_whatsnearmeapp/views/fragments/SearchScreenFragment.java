@@ -18,19 +18,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.g6_whatsnearmeapp.adapters.BusinessItemAdapter;
 import com.example.g6_whatsnearmeapp.databinding.FragmentSearchScreenBinding;
+import com.example.g6_whatsnearmeapp.models.Business;
 import com.example.g6_whatsnearmeapp.viewmodels.HomeScreenModel;
 import com.example.g6_whatsnearmeapp.views.HomeScreen;
+import com.example.g6_whatsnearmeapp.views.OnRowClicked;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class SearchScreenFragment extends Fragment {
+public class SearchScreenFragment extends Fragment implements OnRowClicked {
 
     private FragmentSearchScreenBinding binding;
     private HomeScreenModel homeScreenModel;
     private double currentLong;
     private double currentLat;
+
+    private ArrayList<Business> productsList = new ArrayList<Business>();
+    private BusinessItemAdapter adapter;
 
     @Override
     public View onCreateView (LayoutInflater inflater,
@@ -153,5 +160,10 @@ public class SearchScreenFragment extends Fragment {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onRowClicked(Business product) {
+
     }
 }
