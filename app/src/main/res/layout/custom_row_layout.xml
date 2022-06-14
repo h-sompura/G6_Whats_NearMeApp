@@ -3,34 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
 
     <ImageView
         android:id="@+id/rvBusinessImage"
-        android:layout_width="103dp"
-        android:layout_height="91dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/rvBusinessTitle"
-        android:layout_width="262dp"
-        android:layout_height="27dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:fontFamily="@font/poppins_semibold"
         android:text="Business Name"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/rvBusinessImage"
-        app:layout_constraintTop_toTopOf="@+id/rvBusinessImage" />
+        app:layout_constraintStart_toEndOf="@+id/rvBusinessImage" />
 
     <TextView
         android:id="@+id/rvBusinessCategory"
-        android:layout_width="262dp"
-        android:layout_height="27dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:text="Category"
         app:layout_constraintEnd_toEndOf="@+id/rvBusinessTitle"
         app:layout_constraintHorizontal_bias="0.0"
@@ -40,16 +40,17 @@
     <RatingBar
         android:id="@+id/rvBusinessRating"
         style="?android:attr/ratingBarStyleSmall"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="@+id/rvBusinessCategory"
         app:layout_constraintTop_toBottomOf="@+id/rvBusinessCategory" />
 
     <TextView
         android:id="@+id/rvBusinessStatus"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:text="Status/Open"
         app:layout_constraintEnd_toEndOf="@+id/rvBusinessTitle"
         app:layout_constraintTop_toTopOf="@+id/rvBusinessRating" />

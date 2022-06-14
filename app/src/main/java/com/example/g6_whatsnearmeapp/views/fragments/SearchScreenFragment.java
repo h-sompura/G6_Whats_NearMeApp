@@ -28,8 +28,12 @@ import com.example.g6_whatsnearmeapp.models.BusinessContainer;
 import com.example.g6_whatsnearmeapp.repositories.API.RetrofitClient;
 import com.example.g6_whatsnearmeapp.viewmodels.HomeScreenModel;
 import com.example.g6_whatsnearmeapp.views.HomeScreen;
+import com.example.g6_whatsnearmeapp.views.LoginActivity;
 import com.example.g6_whatsnearmeapp.views.OnBusinessClicked;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -46,7 +50,9 @@ public class SearchScreenFragment extends Fragment implements OnBusinessClicked 
     private double currentLat;
     private ArrayList<Business> businessList = new ArrayList<>();
     private BusinessItemAdapter adapter;
-
+    private String currentUserEmail = "";
+    private List<Business> spBusinessList;
+    private Business currentBusiness;
 
 
     @Override
@@ -149,7 +155,6 @@ public class SearchScreenFragment extends Fragment implements OnBusinessClicked 
             e.printStackTrace();
         }
     }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -159,7 +164,6 @@ public class SearchScreenFragment extends Fragment implements OnBusinessClicked 
         this.binding.rvBusinessItems.setLayoutManager(new LinearLayoutManager(this.getContext()));
         this.binding.rvBusinessItems.addItemDecoration(new DividerItemDecoration(this.getContext(), DividerItemDecoration.VERTICAL));
         this.binding.rvBusinessItems.setAdapter(this.adapter);
-
 
         //viewmodel instance
         homeScreenModel = HomeScreenModel.getInstance(getActivity().getApplication());
@@ -193,7 +197,7 @@ public class SearchScreenFragment extends Fragment implements OnBusinessClicked 
 
     @Override
     public void onRowClicked(Business business) {
-
+        Log.d("abc","Business id:" + business.getBusinessId());
     }
 
 
@@ -249,5 +253,29 @@ public class SearchScreenFragment extends Fragment implements OnBusinessClicked 
             Log.e("api", "getBusinessList: Cannot retrieve Businesses list " + ex.getLocalizedMessage() );
         }
     }
+    void favoritePressed()
+    {
+        LoginActivity activity = (LoginActivity) getActivity();
+        currentUserEmail = activity.sendDataToFragment();
 
+        //currentBusiness = business;
+
+
+        //spBusinessList.add(currentBusiness);
+
+        SharedPreferences sp = this.getContext().getSharedPreferences("SharedPreferences",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        Gson gson = new Gson();
+        String oldJson = sp.getString(currentUserEmail,null);
+
+        Type type = new TypeToken<List<Business>>(){}.getType();
+        List<Business> b = gson.fromJson(oldJson, type);
+        spBusinessList = b;
+        spBusinessList.add(currentBusiness);
+
+        String json = gson.toJson(spBusinessList);
+        editor.putString(currentUserEmail,json);
+        editor.apply();
+
+    }
 }

@@ -2,7 +2,9 @@ package com.example.g6_whatsnearmeapp.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Business
+import java.io.Serializable;
+
+public class Business implements Serializable
 {
     private @SerializedName("id") String businessId;
     private @SerializedName("name") String businessName;
@@ -10,6 +12,7 @@ public class Business
     private @SerializedName("url") String businessUrl;
     private @SerializedName("rating") String businessRating;
     private @SerializedName("distance") String businessDistance;
+    private @SerializedName("categories") Category[] categoriesList;
     private @SerializedName("is_closed") boolean Status;
 
     public String getBusinessId() {
@@ -38,6 +41,10 @@ public class Business
 
     public boolean isStatus() {
         return Status;
+    }
+
+    public Category[] getCategoriesList() {
+        return categoriesList;
     }
 
     @Override

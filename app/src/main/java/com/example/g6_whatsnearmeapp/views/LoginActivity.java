@@ -118,4 +118,9 @@ public class LoginActivity extends AppCompatActivity
         startActivity(intent);
     }
 
+    public String sendDataToFragment()
+    {
+        return binding.etEmail.getText().toString();
+    }
+
 }
