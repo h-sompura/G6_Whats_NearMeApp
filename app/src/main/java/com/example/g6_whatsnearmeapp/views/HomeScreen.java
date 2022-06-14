@@ -107,7 +107,6 @@ public class HomeScreen extends AppCompatActivity implements LocationListener {
                 //saving into viewmodel
                 homeScreenModel.saveCurrentLocation(getCurrentLat,getCurrentLong);
 
-
             }
 
 

@@ -7,13 +7,23 @@ import java.io.Serializable;
 public class Business implements Serializable
 {
     private @SerializedName("id") String businessId;
+    private @SerializedName("price") String businessPriceRating;
     private @SerializedName("name") String businessName;
     private @SerializedName("image_url") String businessImage;
     private @SerializedName("url") String businessUrl;
     private @SerializedName("rating") String businessRating;
     private @SerializedName("distance") String businessDistance;
     private @SerializedName("categories") Category[] categoriesList;
+    private @SerializedName("location") Location businessLocation;
     private @SerializedName("is_closed") boolean Status;
+
+    public Location getBusinessLocation() {
+        return businessLocation;
+    }
+
+    public String getBusinessPriceRating() {
+        return businessPriceRating;
+    }
 
     public String getBusinessId() {
         return businessId;

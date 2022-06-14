@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -24,7 +25,7 @@ public class LoginActivity extends AppCompatActivity
     private ActivityLoginBinding binding;
     private LoginViewModel loginViewModel;
     private UserRepository userRepository;
-
+    private String currentEmail = "";
     private FirebaseAuth mAuth;
 
     @Override
@@ -86,6 +87,14 @@ public class LoginActivity extends AppCompatActivity
             return;
         }
 
+        currentEmail = email;
+        //save email to preferences
+        SharedPreferences sharedPreferences = getSharedPreferences("EmailPreferences",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString("USER_EMAIL",email);
+        editor.apply();
+
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>()
                 {
@@ -120,7 +129,7 @@ public class LoginActivity extends AppCompatActivity
 
     public String sendDataToFragment()
     {
-        return binding.etEmail.getText().toString();
+        return currentEmail;
     }
 
 }

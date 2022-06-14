@@ -3,6 +3,7 @@ package com.example.g6_whatsnearmeapp.views.fragments;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.location.Address;
@@ -12,18 +13,22 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.SearchEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.g6_whatsnearmeapp.R;
 import com.example.g6_whatsnearmeapp.adapters.BusinessItemAdapter;
+import com.example.g6_whatsnearmeapp.databinding.FragmentBusinessDetailBinding;
 import com.example.g6_whatsnearmeapp.databinding.FragmentSearchScreenBinding;
 import com.example.g6_whatsnearmeapp.models.Business;
 import com.example.g6_whatsnearmeapp.models.BusinessContainer;
@@ -200,6 +205,8 @@ public class SearchScreenFragment extends Fragment implements OnBusinessClicked 
     @Override
     public void onRowClicked(Business business) {
         Log.d("abc","Business id:" + business.getBusinessId());
+        NavDirections action = SearchScreenFragmentDirections.actionSearchScreenFragmentToBusinessDetail(business);
+        Navigation.findNavController(getView()).navigate(action);
     }
 
 
@@ -207,7 +214,7 @@ public class SearchScreenFragment extends Fragment implements OnBusinessClicked 
         String yelpApiKey = getResources().getString(R.string.yelp_api_key);
 
         Call<BusinessContainer> businessCall = RetrofitClient.getInstance().getApi().getBusinessesUsingLatLon(yelpApiKey,term,lat,lon);
-
+        this.binding.tvError.setText(""); //clear out the error
         try{
 
             businessCall.enqueue(new Callback<BusinessContainer>() {
@@ -259,30 +266,5 @@ public class SearchScreenFragment extends Fragment implements OnBusinessClicked 
         }catch(Exception ex){
             Log.e("api", "getBusinessList: Cannot retrieve Businesses list " + ex.getLocalizedMessage() );
         }
-    }
-    void favoritePressed()
-    {
-        LoginActivity activity = (LoginActivity) getActivity();
-        currentUserEmail = activity.sendDataToFragment();
-
-        //currentBusiness = business;
-
-
-        //spBusinessList.add(currentBusiness);
-
-        SharedPreferences sp = this.getContext().getSharedPreferences("SharedPreferences",MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
-        Gson gson = new Gson();
-        String oldJson = sp.getString(currentUserEmail,null);
-
-        Type type = new TypeToken<List<Business>>(){}.getType();
-        List<Business> b = gson.fromJson(oldJson, type);
-        spBusinessList = b;
-        spBusinessList.add(currentBusiness);
-
-        String json = gson.toJson(spBusinessList);
-        editor.putString(currentUserEmail,json);
-        editor.apply();
-
     }
 }

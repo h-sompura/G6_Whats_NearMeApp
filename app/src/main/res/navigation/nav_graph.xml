@@ -9,10 +9,23 @@
         android:id="@+id/searchScreenFragment"
         android:name="com.example.g6_whatsnearmeapp.views.fragments.SearchScreenFragment"
         android:label="fragment_search_screen"
-        tools:layout="@layout/fragment_search_screen" />
+        tools:layout="@layout/fragment_search_screen" >
+        <action
+            android:id="@+id/action_searchScreenFragment_to_businessDetail"
+            app:destination="@id/businessDetail" />
+    </fragment>
     <fragment
         android:id="@+id/favouritesScreenFragment"
         android:name="com.example.g6_whatsnearmeapp.views.fragments.FavouritesScreenFragment"
         android:label="fragment_favourites_screen"
         tools:layout="@layout/fragment_favourites_screen" />
+    <fragment
+        android:id="@+id/businessDetail"
+        android:name="com.example.g6_whatsnearmeapp.views.fragments.BusinessDetailFragment"
+        android:label="fragment_business_detail"
+        tools:layout="@layout/fragment_business_detail" >
+        <argument
+            android:name="Business"
+            app:argType="com.example.g6_whatsnearmeapp.models.Business" />
+    </fragment>
 </navigation>
