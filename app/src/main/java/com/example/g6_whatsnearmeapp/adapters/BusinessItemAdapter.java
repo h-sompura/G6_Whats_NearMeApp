@@ -18,6 +18,8 @@ import com.example.g6_whatsnearmeapp.views.OnBusinessClicked;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
 public class BusinessItemAdapter extends RecyclerView.Adapter<BusinessItemAdapter.MyViewHolder> {
@@ -63,8 +65,14 @@ public class BusinessItemAdapter extends RecyclerView.Adapter<BusinessItemAdapte
             //update item bindings in rv
             itemBinding.rvBusinessTitle.setText(currBusiness.getBusinessName());
             float rating = Float.parseFloat(currBusiness.getBusinessRating());
-            String categoryTitle = currBusiness.getCategoriesList()[0].getCategoryTitle(); //just displaying first category of the business
-            itemBinding.rvBusinessCategory.setText(categoryTitle);
+            List<String> categoryTitles = new ArrayList<>();
+            for(int i=0;i<currBusiness.getCategoriesList().length; i++){
+                categoryTitles.add(currBusiness.getCategoriesList()[i].getCategoryTitle());
+            }
+            String displayCategories =Arrays.toString(categoryTitles.toArray());
+
+            //String categoryTitle = currBusiness.getCategoriesList()[0].getCategoryTitle(); //just displaying first category of the business
+            itemBinding.rvBusinessCategory.setText(displayCategories.substring(1,displayCategories.length()-1));
             itemBinding.rvBusinessRating.setRating(rating);
             if(!currBusiness.isStatus())
             {
