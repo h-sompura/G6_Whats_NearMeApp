@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,7 +39,7 @@ public class BusinessItemAdapter extends RecyclerView.Adapter<BusinessItemAdapte
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Business item = dataSourceArray.get(position);
+        Business item = dataSourceArray.get(holder.getAdapterPosition());
         holder.bind(context, item, clickListener);
     }
 

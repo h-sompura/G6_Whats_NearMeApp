@@ -20,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+
 import com.example.g6_whatsnearmeapp.R;
 import com.example.g6_whatsnearmeapp.adapters.BusinessItemAdapter;
 import com.example.g6_whatsnearmeapp.databinding.FragmentSearchScreenBinding;
@@ -28,8 +29,13 @@ import com.example.g6_whatsnearmeapp.models.BusinessContainer;
 import com.example.g6_whatsnearmeapp.repositories.API.RetrofitClient;
 import com.example.g6_whatsnearmeapp.viewmodels.HomeScreenModel;
 import com.example.g6_whatsnearmeapp.views.HomeScreen;
+import com.example.g6_whatsnearmeapp.views.LoginActivity;
 import com.example.g6_whatsnearmeapp.views.OnBusinessClicked;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Array;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -46,13 +52,13 @@ public class SearchScreenFragment extends Fragment implements OnBusinessClicked 
     private double currentLat;
     private ArrayList<Business> businessList = new ArrayList<>();
     private BusinessItemAdapter adapter;
-
-
+    private String currentUserEmail = "";
+    private List<Business> spBusinessList;
+    private Business currentBusiness;
 
     @Override
-    public View onCreateView (LayoutInflater inflater,
-                              ViewGroup container,
-                              Bundle savedInstanceState) {
+    public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         binding = FragmentSearchScreenBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         return view;
@@ -166,7 +172,6 @@ public class SearchScreenFragment extends Fragment implements OnBusinessClicked 
 
         currentLat = homeScreenModel.getCurrentLatitude();
         currentLong = homeScreenModel.getCurrentLongitude();
-
         try {
             Geocoder geocoder = new Geocoder(this.getContext(), Locale.getDefault());
             List<Address> addresses = geocoder.getFromLocation(currentLat,currentLong,1);
@@ -192,7 +197,37 @@ public class SearchScreenFragment extends Fragment implements OnBusinessClicked 
     }
 
     @Override
-    public void onRowClicked(Business business) {
+    public void onRowClicked(Business business)
+    {
+        Log.d("abc","Business id:" + business.getBusinessId());
+    }
+
+
+
+
+    void favoritePressed()
+    {
+        LoginActivity activity = (LoginActivity) getActivity();
+        currentUserEmail = activity.sendDataToFragment();
+
+        //currentBusiness = business;
+
+
+        //spBusinessList.add(currentBusiness);
+
+        SharedPreferences sp = this.getContext().getSharedPreferences("SharedPreferences",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        Gson gson = new Gson();
+        String oldJson = sp.getString(currentUserEmail,null);
+
+        Type type = new TypeToken<List<Business>>(){}.getType();
+        List<Business> b = gson.fromJson(oldJson, type);
+        spBusinessList = b;
+        spBusinessList.add(currentBusiness);
+
+        String json = gson.toJson(spBusinessList);
+        editor.putString(currentUserEmail,json);
+        editor.apply();
 
     }
 
