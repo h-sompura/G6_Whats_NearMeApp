@@ -1,5 +1,7 @@
 package com.example.g6_whatsnearmeapp.repositories.API;
 
+import com.example.g6_whatsnearmeapp.models.BusinessContainer;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
@@ -22,7 +24,7 @@ public interface YelpAPI {
 
     //HTTP request - Get all businesses based on a search term & latitude and longitude
     @GET("businesses/search")
-    Call<String> getBusinessesUsingLatLon(
+    Call<BusinessContainer> getBusinessesUsingLatLon(
             @Header("Authorization") String authHeader,
             @Query("term") String searchTerm,
             @Query("latitude") Double latitude,

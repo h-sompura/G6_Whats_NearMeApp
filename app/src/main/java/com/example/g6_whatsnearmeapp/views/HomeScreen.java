@@ -27,6 +27,8 @@ import android.widget.Toast;
 import com.example.g6_whatsnearmeapp.R;
 import com.example.g6_whatsnearmeapp.databinding.ActivityHomeScreenBinding;
 import com.example.g6_whatsnearmeapp.databinding.ActivityLoginBinding;
+import com.example.g6_whatsnearmeapp.models.BusinessContainer;
+import com.example.g6_whatsnearmeapp.repositories.API.RetrofitClient;
 import com.example.g6_whatsnearmeapp.viewmodels.HomeScreenModel;
 import com.google.android.gms.common.api.Status;
 import com.google.android.libraries.places.api.Places;
@@ -36,9 +38,12 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+
+import retrofit2.Call;
 
 public class HomeScreen extends AppCompatActivity implements LocationListener {
 
@@ -47,6 +52,7 @@ public class HomeScreen extends AppCompatActivity implements LocationListener {
     private HomeScreenModel homeScreenModel;
     private double getCurrentLat;
     private double getCurrentLong;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +106,8 @@ public class HomeScreen extends AppCompatActivity implements LocationListener {
 
                 //saving into viewmodel
                 homeScreenModel.saveCurrentLocation(getCurrentLat,getCurrentLong);
+
+
             }
 
 
@@ -184,4 +192,8 @@ public class HomeScreen extends AppCompatActivity implements LocationListener {
     public void onProviderDisabled(String provider) {
 
     }
+
+
+
+
 }

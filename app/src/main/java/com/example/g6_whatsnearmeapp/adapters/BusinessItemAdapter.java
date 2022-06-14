@@ -1,6 +1,7 @@
 package com.example.g6_whatsnearmeapp.adapters;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.g6_whatsnearmeapp.databinding.CustomRowLayoutBinding;
 import com.example.g6_whatsnearmeapp.models.Business;
-import com.example.g6_whatsnearmeapp.views.OnRowClicked;
+import com.example.g6_whatsnearmeapp.views.OnBusinessClicked;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -20,10 +22,10 @@ public class BusinessItemAdapter extends RecyclerView.Adapter<BusinessItemAdapte
     private final Context context;
     private final ArrayList<Business> dataSourceArray;
     CustomRowLayoutBinding binding;
-    private final OnRowClicked clickListener;
+    private final OnBusinessClicked clickListener;
 
-    public BusinessItemAdapter(Context context, ArrayList<Business> products, OnRowClicked clickListener){
-        this.dataSourceArray = products;
+    public BusinessItemAdapter(Context context, ArrayList<Business> businesses, OnBusinessClicked clickListener){
+        this.dataSourceArray = businesses;
         this.context = context;
         this.clickListener = clickListener;
     }
@@ -55,15 +57,27 @@ public class BusinessItemAdapter extends RecyclerView.Adapter<BusinessItemAdapte
             this.itemBinding = binding;
         }
 
-        public void bind(Context context, Business currProduct, OnRowClicked clickListener){
+        public void bind(Context context, Business currBusiness, OnBusinessClicked clickListener){
             //TODO: update item bindings in rv
-            //itemBinding.rvBusinessTitle.setText(currProduct.getName());
-            //itemBinding.tvLine2.setText("Price is: $" + currProduct.getPrice());
+            itemBinding.rvBusinessTitle.setText(currBusiness.getBusinessName());
+            float rating = Float.parseFloat(currBusiness.getBusinessRating());
+            itemBinding.rvBusinessRating.setRating(rating);
+            if(currBusiness.isStatus())
+            {
+                itemBinding.rvBusinessStatus.setText("Open");
+            }
+            else
+            {
+                itemBinding.rvBusinessStatus.setText("Closed");
+            }
+
+            Picasso.get().load(currBusiness.getBusinessImage()).into(itemBinding.rvBusinessImage);
+
 
             itemBinding.getRoot().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    clickListener.onRowClicked(currProduct);
+                    clickListener.onRowClicked(currBusiness);
                 }
             });
         }
