@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".views.fragments.SearchScreenFragment">
 
+    <TextView
+        android:id="@+id/tvError"
+        android:layout_width="match_parent"
+        android:layout_margin="8dp"
+        android:fontFamily="@font/poppins_semibold"
+        app:layout_constraintStart_toStartOf="@+id/etSearchTerm"
+        app:layout_constraintTop_toBottomOf="@+id/etSearchTerm"
+        android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/tvLocationName"

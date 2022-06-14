@@ -4,6 +4,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.g6_whatsnearmeapp.R;
 import com.example.g6_whatsnearmeapp.adapters.BusinessItemAdapter;
@@ -225,6 +227,11 @@ public class SearchScreenFragment extends Fragment implements OnBusinessClicked 
 
                         if (mainResponse.getBusinessList().isEmpty()){
                             Log.e("api", "onResponse: No Businesses received");
+                            //clear the business list
+                            businessList.clear();
+                            adapter.notifyDataSetChanged();
+                            binding.tvError.setText("No items found based on your search! :(");
+                            binding.tvError.setTextColor(Color.parseColor("red"));
                         }else{
                             businessList.clear();
 
