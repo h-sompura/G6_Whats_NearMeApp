@@ -103,6 +103,7 @@ public class SearchScreenFragment extends Fragment implements OnBusinessClicked 
     public void onResume() {
         super.onResume();
         //viewmodel instance
+
         homeScreenModel = HomeScreenModel.getInstance(getActivity().getApplication());
 
         currentLat = homeScreenModel.getCurrentLatitude();
@@ -165,7 +166,7 @@ public class SearchScreenFragment extends Fragment implements OnBusinessClicked 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        this.binding.tvError.setText(""); //clear out the error
         this.adapter = new BusinessItemAdapter(this.getContext(), this.businessList, this::onRowClicked);
 
         this.binding.rvBusinessItems.setLayoutManager(new LinearLayoutManager(this.getContext()));
@@ -195,7 +196,13 @@ public class SearchScreenFragment extends Fragment implements OnBusinessClicked 
             public void onClick(View v) {
                 String searchedTerm = binding.etSearchTerm.getText().toString();
                 Log.d("Search", searchedTerm);
-                getBusinessList(searchedTerm,currentLat,currentLong);
+                if(!(currentLat == 0.0 && currentLong == 0.0)){
+                    getBusinessList(searchedTerm,currentLat,currentLong);
+                } else {
+                    binding.tvError.setText("Current location is not set up!");
+                    binding.tvError.setTextColor(Color.parseColor("red"));
+                }
+
 
                 //call api after getting the searched term and location!
             }

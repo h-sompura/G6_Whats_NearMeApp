@@ -15,7 +15,6 @@ public interface YelpAPI {
 
     //HTTP request - Get all businesses based on a search term & location
     @GET("businesses/search")
-    //TODO: update the type to a business model class instead of String
     Call<String> getBusinessesUsingLocation(
             @Header("Authorization") String authHeader,
             @Query("term") String searchTerm,
