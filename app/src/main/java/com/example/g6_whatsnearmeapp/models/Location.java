@@ -2,7 +2,9 @@ package com.example.g6_whatsnearmeapp.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Location {
+import java.io.Serializable;
+
+public class Location implements Serializable {
     private @SerializedName("address1")
     String address1;
     private @SerializedName("city")
