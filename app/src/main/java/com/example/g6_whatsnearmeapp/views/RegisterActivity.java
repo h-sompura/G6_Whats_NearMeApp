@@ -75,6 +75,16 @@ public class RegisterActivity extends AppCompatActivity
             binding.etNewPassword.setText("");
             return;
         }
+        //check if password is equal to 6 characters
+        //because firebase auth requires password to be atleast 6 characters
+        if(!(binding.etNewPassword.getText().length() >= 6)){
+            Log.d("abc","Password is not 6 characters");
+            binding.tvError.setText("Password should be at least 6 characters");
+            //clear input fields
+            binding.etNewEmail.setText("");
+            binding.etNewPassword.setText("");
+            return;
+        }
         binding.tvError.setText("");
 
         mAuth.createUserWithEmailAndPassword(newEmail, newPassword)
